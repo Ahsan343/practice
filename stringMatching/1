@@ -1,0 +1,45 @@
+#include<iostream>
+#include<string>
+
+bool match(const std::string& main, const std::string& sub){
+	unsigned int i =0, j = 0, first;
+	while(main[i]){
+		while(sub[0] != main[i] && main[i]){
+			i++;
+		}
+		if(i >= main.length())
+		{
+			std::cout<<"Return case 1\n";
+			return false;
+		}
+		if(sub[j] == main[i])
+			first = i;
+		while(sub[j] == main[i]){
+			i++;
+			j++;
+		}
+		if(!sub[j]){
+			std::cout<< "Match from "<<first<<" to "<<i<<std::endl;
+			return true;
+		}
+		++i;
+	}
+	std::cout<<"Return case 2\n";
+	return false;
+
+};
+
+int main(){
+	std::string mains,sub;
+	std::cout<<"Enter main string:";
+	std::getline(std::cin, mains);
+	std::cout<<"Enter substring:";
+	std::getline(std::cin, sub);
+	if(match(mains,sub)){
+		std::cout<<"Match found\n";
+	}
+	else{
+		std::cout<<"No match\n";
+	}
+	return 0;
+}

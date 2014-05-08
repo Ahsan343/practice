@@ -1,0 +1,46 @@
+#include<iostream>
+#include<vector>
+
+void printVector(std::vector<int> v){
+	unsigned int i =0;
+	while(i < v.size()){
+		std::cout<< v[i]<<" ";
+		i++;
+	}
+}
+
+
+
+int iterateSequence(std::vector<int> a, int N){
+	int sum;
+	int i = 0;
+	int j = a.size();
+	while(N > 0){
+		while( (i + 1) < j){
+			std::cout<<"N:"<<N<<std::endl;
+			printVector(a);
+			std::cout<<std::endl;
+			std::cout<<"i::a[i+1]:a[i],new a[i]::"<<i<<":"<<a[i+1]<<":"<<a[i];
+			a[i] = a[i+1] - a[i];
+			std::cout<<a[i]<<std::endl;
+			i++;
+			j--;
+		}
+		N--;
+	} 	
+
+
+	sum = a[j];
+	for(int x = j-1; j >=0; --j){
+		sum += a[x];
+	}
+	return sum;
+}
+
+int main(){
+	static const int arr[] = {1,2,5,6};
+	std::vector<int> vec (arr, arr + sizeof(arr) / sizeof(arr[0]) );
+	int sum = iterateSequence(vec,2);
+	std::cout<<"Sum:"<<sum<<std::endl;
+	return 0;
+}

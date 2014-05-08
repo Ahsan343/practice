@@ -1,0 +1,40 @@
+#include<iostream>
+
+struct node{
+	int data;
+	struct node* left;
+	struct node* right;
+};
+
+typedef struct node Node;
+
+Node* newNode(int d){
+	Node *newNode = new Node;
+	newNode->data = d;
+	newNode->left = newNode->right = NULL;
+}
+
+void leftView(Node *root, int level, int *maxlevel){
+	if(!root) return NULL;
+	if(*maxlevel < level){
+		std::cout<<root->data<<" ";
+		*maxlevel = level;
+	}
+
+	leftView(root->left, level+1, maxlevel);
+	leftView(root->right, level+1, maxlevel);
+}
+
+int main(){
+    struct node *root = newNode(12);
+    root->left = newNode(10);
+    root->right = newNode(30);
+    root->right->left = newNode(25);
+    root->right->right = newNode(40);
+  
+    int level = 1;
+    int maxlevel = 0;
+    leftView(root,level, &maxlevel);
+ 
+    return 0;
+}

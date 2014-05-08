@@ -1,0 +1,51 @@
+#include<iostream>
+
+struct node{
+	int data;
+	struct node* left;
+	struct node* right;
+};
+
+
+void insert(Node** head, int data){
+	Node* newNode = new Node;
+	newNode->data = data;
+	newNode->left = newNode->right = NULL;
+	if(!(*head)){
+		*head = newNode;
+	}
+	else{
+		Node *current = *head;
+		while(current->next){
+			current = current->next;
+		}
+		current->next = newNode;
+	}
+
+}
+
+void printList(Node* head){
+	if(head){
+		Node *current = head;
+		std::cout<<"Current List:";
+		while(current){
+			std::cout<<current->data<<" ";
+			current = current->next;
+		}
+		std::cout<<std::endl;
+	}
+}
+
+int main(){
+	Node *head = NULL;
+	insert(&head , 1);
+	insert(&head , 2);
+	insert(&head , 3);
+	insert(&head , 4);
+	insert(&head , 5);
+	insert(&head , 6);
+	insert(&head , 7);
+	printList(head);
+
+	return 0;
+}

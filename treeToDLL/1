@@ -1,0 +1,73 @@
+#include<iostream>
+struct node {
+	int data;
+	struct node *left;
+	struct node *right;
+	node(int d){
+		data = d;
+		left = right = NULL;
+	}
+};
+
+typedef struct node Node;
+
+
+Node* binaryTree2DLLUtil(Node *root){
+	if(!root){
+		return root;
+	}
+	if(root->left){
+		Node* ltree = binaryTree2DLLUtil(root->left);
+		while(ltree->right) 
+			ltree = ltree->right;
+		ltree->right = root;
+		root->left = ltree;
+	}
+	
+	if(root->right){
+		Node *rtree = binaryTree2DLLUtil(root->right);
+		while(rtree->left)
+			rtree = rtree->left;
+		rtree->left = root;
+		root->right = rtree;
+	}
+	return root;
+
+}
+
+void printList(Node *head){
+	if(head){
+		std::cout<<"DLL:";
+		Node *temp = head;
+		while(temp){
+			std::cout<<temp->data<<" ";
+			temp = temp->right;
+		}
+		std::cout<<std::endl;
+
+	}
+
+}
+
+Node* binaryTree2DLL(Node *root){
+	root = binaryTree2DLLUtil(root);
+	while(root->left) 
+		root = root->left;
+	return root;
+}
+int main(){
+    Node *root        = new Node(10);
+    root->left        = new Node(12);
+    root->right       = new Node(15);
+    root->left->left  = new Node(25);
+    root->left->right = new Node(30);
+    root->right->left = new Node(36);
+ 
+    // Convert to DLL
+    Node *head = bintree2list(root);
+ 
+    // Print the converted list
+	printList(head);
+	
+	return 0;
+}
