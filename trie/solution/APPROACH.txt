@@ -1,0 +1,31 @@
+To run the program:
+
+    make clean: should clean all executables.
+    make: This would create an executable 'longestword'
+    ./longestword will execute and print output if "wordsforproblem.txt" is in the folder.
+
+
+-------Approach----------------------------
+
+1. In order to solve this problem, For each word, we will have to meet two condtions while iterating the word character by character:
+a. If word's prefix exist in file
+b. The remaining suffix is also a valid concatenated word.
+
+Since We are dealing with each word character by character, it would be good 
+idea to use Prefix Tree ('Trie') data structure, which often is used in 'word prediction/search algorithms'. Trie will let the words share prefixes. Thus, it will keep track of all the valid concatenated words.
+
+1. We scan file and insert each word to the trie.
+2. To check if the word meets the criteria, we traverse the string character by character, till we have found a complete word from the tree, now, the remaining suffix is then recursive call to this same function. 
+3. Each time we find a word which meets criteria, we increment the count and if it is bigger than longest word so far, we make it longest, and update second longest. 
+
+
+-----------------Another Approach-------------
+We could also have solved this problem by Dynamic Paradigm Approach.
+
+We can construct a DAG (Directed Acyclic Graph) where each word would 
+be vertex, and there would be an edge between two words A and B if B could be made by A, ie. A is prefix of B.
+
+Then we can call the Depth first search from a Dummy Start node(which is reachable from all the words). The node where our DFS end would be the longest word possible, by retracing the path taken by DFS, we can similarly give second third .. words which meets this criteria. On finding each valid word we increment the count, and thus we get the count this way. However this approach would be O(n^2) and will be expensive then Prefix tree approach.
+
+
+
