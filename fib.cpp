@@ -1,3 +1,5 @@
+
+// A fibonacci program to print till nth term.
 #include<iostream>
 
 void fibSeries(int n){
